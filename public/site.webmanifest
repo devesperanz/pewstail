@@ -1,0 +1,17 @@
+{
+  "name": "Paws & Tail Boutique",
+  "short_name": "Paws&Tail",
+  "description": "Sustainable, organic essentials for the modern pet owner.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F6",
+  "theme_color": "#84A59D",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

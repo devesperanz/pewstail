@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background pill -->
+  <rect width="64" height="64" rx="16" fill="#84A59D"/>
+
+  <!-- Paw pad (main) -->
+  <ellipse cx="32" cy="38" rx="11" ry="9" fill="white"/>
+
+  <!-- Top left toe -->
+  <ellipse cx="18" cy="27" rx="5" ry="6.5" fill="white"/>
+  <!-- Top right toe -->
+  <ellipse cx="46" cy="27" rx="5" ry="6.5" fill="white"/>
+  <!-- Middle left toe -->
+  <ellipse cx="25" cy="22" rx="5" ry="6.5" fill="white"/>
+  <!-- Middle right toe -->
+  <ellipse cx="39" cy="22" rx="5" ry="6.5" fill="white"/>
+</svg>
