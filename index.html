@@ -41,9 +41,24 @@
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- ─── Fonts (non-blocking) ─────────────────────────────── -->
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap"
+          media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" />
+    </noscript>
+
+    <!-- ─── LCP image preload ─────────────────────────────────── -->
     <link rel="preload" as="image"
           href="https://images.unsplash.com/photo-1544568100-847a948585b9?w=1600&q=80"
-          fetchpriority="high" />
+          fetchpriority="high"
+          imagesrcset="https://images.unsplash.com/photo-1544568100-847a948585b9?w=800&q=80 800w, https://images.unsplash.com/photo-1544568100-847a948585b9?w=1200&q=80 1200w, https://images.unsplash.com/photo-1544568100-847a948585b9?w=1600&q=80 1600w"
+          imagesizes="100vw" />
   </head>
   <body>
     <div id="root"></div>

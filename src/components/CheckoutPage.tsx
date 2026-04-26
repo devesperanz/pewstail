@@ -16,12 +16,14 @@ interface Props {
 }
 
 type Step = 'details' | 'sending' | 'confirmed' | 'error';
+type EmailError = { text?: string; status?: number; message?: string };
 
 const INPUT = "w-full bg-white border border-(--color-border) rounded-2xl px-4 sm:px-5 py-3.5 sm:py-4 text-sm text-(--color-dark) placeholder:text-(--color-muted)/50 focus:outline-none focus:border-(--color-primary) transition-all";
 const LABEL = "block text-[10px] font-bold uppercase tracking-widest text-(--color-muted) mb-2";
 
 const CheckoutPage = memo(({ cart, cartTotal, onBack, onConfirm }: Props) => {
   const [step, setStep] = useState<Step>('details');
+  const [emailError, setEmailError] = useState<EmailError | null>(null);
   const [form, setForm] = useState({
     email: '', firstName: '', lastName: '',
     address: '', city: '', state: '', zip: '', country: 'United States',
@@ -55,6 +57,7 @@ const CheckoutPage = memo(({ cart, cartTotal, onBack, onConfirm }: Props) => {
 
     const templateParams = {
       to_email:    form.email,
+      email:       form.email,
       first_name:  form.firstName,
       last_name:   form.lastName,
       order_items: orderItems,
@@ -74,8 +77,15 @@ const CheckoutPage = memo(({ cart, cartTotal, onBack, onConfirm }: Props) => {
       const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
       console.log('EmailJS success:', result);
       setStep('confirmed');
-    } catch (err) {
-      console.error('EmailJS error:', err);
+    } catch (err: unknown) {
+      const e = err as EmailError;
+      console.error('EmailJS error:', {
+        status: e?.status,
+        text: e?.text,
+        message: e?.message,
+        raw: err,
+      });
+      setEmailError(e);
       setStep('error');
     }
   };
@@ -128,9 +138,14 @@ const CheckoutPage = memo(({ cart, cartTotal, onBack, onConfirm }: Props) => {
         <h2 className="text-3xl sm:text-4xl font-display font-light text-(--color-dark) tracking-tight mb-4">
           Something went wrong.
         </h2>
-        <p className="text-(--color-muted) text-base mb-10 max-w-sm mx-auto leading-relaxed">
+        <p className="text-(--color-muted) text-base mb-4 max-w-sm mx-auto leading-relaxed">
           We couldn't send your confirmation email. Your order may still have been placed — please contact us at hello@pawsandtail.com.
         </p>
+        {emailError && (
+          <p className="text-xs font-mono text-red-400 bg-red-50 border border-red-100 rounded-xl px-4 py-3 mb-6 max-w-sm mx-auto text-left break-all">
+            {emailError.status ? `Status ${emailError.status}: ` : ''}{emailError.text ?? emailError.message ?? 'Unknown error'}
+          </p>
+        )}
         <div className="flex gap-4 justify-center flex-wrap">
           <button
             onClick={() => setStep('details')}

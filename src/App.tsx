@@ -112,7 +112,7 @@ export default function App() {
     <div className="min-h-screen selection:bg-(--color-primary)/20">
 
       {/* Announcement Bar */}
-      <div className="bg-(--color-primary) text-white text-[9px] sm:text-[10px] py-1.5 text-center font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase z-50 relative px-4">
+      <div role="banner" aria-label="Promotional announcement" className="bg-(--color-primary) text-white text-[9px] sm:text-[10px] py-1.5 text-center font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase z-50 relative px-4">
         Free Express Shipping on all Pet Wellness Kits over $75
       </div>
 
@@ -128,7 +128,7 @@ export default function App() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           {/* Logo */}
-          <button onClick={() => goToShop('all')} className="flex items-center gap-2 group cursor-pointer shrink-0">
+          <button type="button" onClick={() => goToShop('all')} aria-label="Paws & Tail — go to shop" className="flex items-center gap-2 group cursor-pointer shrink-0">
             <div className="w-8 h-8 sm:w-9 sm:h-9 bg-(--color-primary) rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg shadow-(--color-primary)/20">
               <PawPrint className="text-white" size={18} />
             </div>
@@ -138,9 +138,10 @@ export default function App() {
           </button>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex gap-1">
+          <nav aria-label="Main navigation" className="hidden lg:flex gap-1">
             {NAV_CATS.map(cat => (
-              <button key={cat} onClick={() => goToShop(cat)}
+              <button key={cat} type="button" onClick={() => goToShop(cat)}
+                aria-current={isShopCatActive(cat) ? 'page' : undefined}
                 className={`px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all ${
                   isShopCatActive(cat)
                     ? 'bg-(--color-primary)/10 text-(--color-primary)'
@@ -148,7 +149,8 @@ export default function App() {
                 }`}
               >{cat}</button>
             ))}
-            <button onClick={() => setCurrentPage('mission')}
+            <button type="button" onClick={() => setCurrentPage('mission')}
+              aria-current={currentPage === 'mission' ? 'page' : undefined}
               className={`px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all ${
                 currentPage === 'mission'
                   ? 'bg-(--color-primary)/10 text-(--color-primary)'
@@ -161,21 +163,27 @@ export default function App() {
           <div className="flex items-center gap-2 sm:gap-4">
             {/* Search — tablet+ */}
             <div className="hidden md:flex items-center bg-(--color-border)/50 rounded-full px-4 py-2.5 border border-(--color-border)">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-(--color-muted)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-(--color-muted)" aria-hidden="true">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
-              <input type="text" placeholder="Find essentials..."
+              <input
+                type="search"
+                placeholder="Find essentials..."
+                aria-label="Search products"
                 className="bg-transparent border-0 outline-none focus:outline-none focus:ring-0 text-xs font-medium w-32 lg:w-36 ml-2 text-(--color-dark) placeholder:text-(--color-muted)/60"
                 value={searchQuery} onChange={handleSearchChange}
               />
             </div>
 
             {/* Cart */}
-            <button onClick={openCart}
+            <button
+              type="button"
+              onClick={openCart}
+              aria-label={`Open cart, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}`}
               className="bg-(--color-dark) text-white px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl text-[10px] sm:text-xs font-extrabold uppercase tracking-widest flex items-center gap-2 sm:gap-3 hover:bg-(--color-primary) transition-all shadow-lg active:scale-95"
             >
               Cart
-              <span className="w-4 h-4 sm:w-5 sm:h-5 bg-white/25 rounded-md flex items-center justify-center text-[9px] sm:text-[10px] font-black">
+              <span aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 bg-white/25 rounded-md flex items-center justify-center text-[9px] sm:text-[10px] font-black">
                 {cartCount}
               </span>
             </button>

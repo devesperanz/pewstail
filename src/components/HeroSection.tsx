@@ -12,7 +12,11 @@ const HeroSection = memo(({ onExplore }: Props) => (
     <div className="absolute inset-0 z-0">
       <img
         src="https://images.unsplash.com/photo-1544568100-847a948585b9?w=1600&q=80"
-        alt="Hero Dog"
+        srcSet="https://images.unsplash.com/photo-1544568100-847a948585b9?w=800&q=80 800w, https://images.unsplash.com/photo-1544568100-847a948585b9?w=1200&q=80 1200w, https://images.unsplash.com/photo-1544568100-847a948585b9?w=1600&q=80 1600w"
+        sizes="100vw"
+        alt="A happy golden retriever dog in a natural outdoor setting"
+        width={1600}
+        height={900}
         className="w-full h-full object-cover"
         loading="eager"
         fetchPriority="high"
@@ -39,6 +43,7 @@ const HeroSection = memo(({ onExplore }: Props) => (
           Sustainable, organic, and ethically sourced essentials for the modern pet owner.
         </p>
         <button
+          type="button"
           onClick={onExplore}
           className="bg-white text-(--color-dark) px-7 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold shadow-2xl hover:bg-(--color-primary) hover:text-white transition-all flex items-center gap-3 group active:scale-95 text-sm sm:text-base"
         >
