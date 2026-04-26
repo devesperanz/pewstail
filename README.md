@@ -63,19 +63,19 @@ src/
 
 ## Email Setup (EmailJS)
 
-Order confirmation emails are sent through [EmailJS](https://emailjs.com). Credentials live in `CheckoutPage.tsx`:
+Order confirmation emails are sent through [EmailJS](https://emailjs.com). Add your credentials to `CheckoutPage.tsx`:
 
 ```ts
-const SERVICE_ID  = 'service_m8ob9mb';
-const TEMPLATE_ID = 'template_mdt8i75';
-const PUBLIC_KEY  = 'K9gyxDoAN6WCEcbFl';
+const SERVICE_ID  = 'your_service_id';
+const TEMPLATE_ID = 'your_template_id';
+const PUBLIC_KEY  = 'your_public_key';
 ```
 
 Template variables used:
 
 | Variable | Description |
 |---|---|
-| `{{to_email}}` | Customer email address |
+| `{{email}}` / `{{to_email}}` | Customer email address |
 | `{{first_name}}` / `{{last_name}}` | Customer name |
 | `{{order_items}}` | Line items, one per row |
 | `{{subtotal}}` / `{{shipping}}` / `{{tax}}` / `{{total}}` | Order totals |
